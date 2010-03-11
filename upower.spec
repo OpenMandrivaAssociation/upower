@@ -33,6 +33,7 @@ BuildRequires: libusb-devel
 BuildRequires: libxslt-proc
 BuildRequires: docbook-style-xsl
 BuildRequires: gtk-doc >= 1.3
+BuildRequires: gobject-introspection-devel
 Requires: pm-utils
 Obsoletes: devicekit-power < 014-2
 Provides: devicekit-power = 014-2
