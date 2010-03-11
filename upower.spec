@@ -1,7 +1,7 @@
 %define name	upower
 %define oname	UPower
 %define version	0.9.1
-%define release	%mkrel 1
+%define release	%mkrel 2
 %define major 1
 %define libname %mklibname upower-glib %major
 %define develname %mklibname -d upower-glib
@@ -35,8 +35,8 @@ BuildRequires: docbook-style-xsl
 BuildRequires: gtk-doc >= 1.3
 BuildRequires: gobject-introspection-devel
 Requires: pm-utils
-Obsoletes: devicekit-power < 014-2
-Provides: devicekit-power = 014-2
+Obsoletes: devicekit-power
+Provides: devicekit-power
 
 %description
 %{oname} provides a daemon, API and command line tools for
@@ -46,7 +46,7 @@ managing power devices attached to the system.
 Summary: Shared Library of %{oname}
 Group: System/Libraries
 Requires: %name >= %version-%release
-Obsoletes: %oldlibname < 014-2
+Obsoletes: %oldlibname
 
 %description -n %libname
 %{oname} provides a daemon, API and command line tools for
@@ -61,7 +61,7 @@ Requires: %{name} = %{version}
 Requires: %libname = %version-%release
 #gw libtool dep
 Requires: libusb-devel
-Obsoletes: %olddevelname < 014-2
+Obsoletes: %olddevelname
 
 %description -n %develname
 Headers and libraries for %{oname}
@@ -85,7 +85,7 @@ rm -rf %{buildroot}
 %files -f UPower.lang
 %defattr(-,root,root,-)
 
-%doc README AUTHORS NEWS COPYING HACKING
+%doc README AUTHORS NEWS HACKING
 
 %{_sysconfdir}/dbus-1/system.d/*.conf
 /lib/udev/rules.d/*.rules
@@ -104,6 +104,7 @@ rm -rf %{buildroot}
 %files -n %libname
 %defattr(-,root,root,-)
 %{_libdir}/*.so.%{major}*
+%{_libdir}/girepository-1.0/*.typelib
 
 %files -n %develname
 %{_datadir}/dbus-1/interfaces/*.xml
@@ -114,7 +115,6 @@ rm -rf %{buildroot}
 %{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
-%{_libdir}/girepository-1.0/*.typelib
 %{_datadir}/gir-1.0/*.gir
 %{_includedir}/libupower-glib
 
