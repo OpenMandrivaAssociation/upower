@@ -103,8 +103,9 @@ rm -rf %{buildroot}
 
 %files -n %libname
 %defattr(-,root,root,-)
-%{_libdir}/*.so.%{major}*
-%{_libdir}/girepository-1.0/*.typelib
+%{_libdir}/libdevkit-power-gobject.so.%{major}*
+%{_libdir}/libupower-glib.so.%{major}*
+%{_libdir}/girepository-1.0/UPowerGlib-1.0.typelib
 
 %files -n %develname
 %{_datadir}/dbus-1/interfaces/*.xml
@@ -114,7 +115,8 @@ rm -rf %{buildroot}
 %{_libdir}/*.a
 %{_libdir}/*.la
 %{_libdir}/*.so
-%{_libdir}/pkgconfig/*.pc
-%{_datadir}/gir-1.0/*.gir
+%{_libdir}/pkgconfig/devkit-power-gobject.pc
+%{_libdir}/pkgconfig/upower-glib.pc
+%{_datadir}/gir-1.0/UPowerGlib-1.0.gir
 %{_includedir}/libupower-glib
 
