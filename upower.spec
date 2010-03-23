@@ -16,7 +16,7 @@ Release: %release
 Summary: Power Management Service
 License: GPLv2+
 Group: System/Kernel and hardware
-URL: http://hal.freedesktop.org/releases/
+URL:     http://upower.freedesktop.org/
 Source0: http://hal.freedesktop.org/releases/%{oname}-%{version}.tar.bz2
 BuildRoot: %_tmppath/%name-%version-%release-root
 Provides: %{oname} = %{version}-%{release}
