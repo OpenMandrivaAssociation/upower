@@ -1,7 +1,7 @@
 %define name	upower
 %define oname	UPower
-%define version	0.9.1
-%define release	%mkrel 2
+%define version	0.9.2
+%define release	%mkrel 1
 %define major 1
 %define libname %mklibname upower-glib %major
 %define develname %mklibname -d upower-glib
@@ -17,7 +17,7 @@ Summary: Power Management Service
 License: GPLv2+
 Group: System/Kernel and hardware
 URL:     http://upower.freedesktop.org/
-Source0: http://hal.freedesktop.org/releases/%{oname}-%{version}.tar.bz2
+Source0: http://upower.freedesktop.org/releases/%{name}-%{version}.tar.bz2
 BuildRoot: %_tmppath/%name-%version-%release-root
 Provides: %{oname} = %{version}-%{release}
 BuildRequires: libgudev-devel
@@ -67,7 +67,7 @@ Obsoletes: %olddevelname
 Headers and libraries for %{oname}
 
 %prep
-%setup -q -n %{oname}-%{version}
+%setup -q
 
 %build
 %configure2_5x --enable-gtk-doc
