@@ -1,6 +1,6 @@
 %define name	upower
 %define oname	UPower
-%define version	0.9.2
+%define version	0.9.4
 %define release	%mkrel 1
 %define major 1
 %define libname %mklibname upower-glib %major
@@ -77,16 +77,17 @@ Headers and libraries for %{oname}
 rm -rf %{buildroot}
 %makeinstall_std
 
-%find_lang UPower
+%find_lang %name
 
 %clean
 rm -rf %{buildroot}
 
-%files -f UPower.lang
+%files -f %name.lang
 %defattr(-,root,root,-)
 
 %doc README AUTHORS NEWS HACKING
-
+%dir %_sysconfdir/UPower/
+%config(noreplace) %_sysconfdir/UPower/UPower.conf
 %{_sysconfdir}/dbus-1/system.d/*.conf
 /lib/udev/rules.d/*.rules
 
