@@ -1,6 +1,6 @@
 %define name	upower
 %define oname	UPower
-%define version	0.9.4
+%define version	0.9.5
 %define release	%mkrel 1
 %define major 1
 %define libname %mklibname upower-glib %major
