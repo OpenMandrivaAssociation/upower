@@ -1,7 +1,7 @@
 %define name	upower
 %define oname	UPower
-%define version	0.9.5
-%define release	%mkrel 2
+%define version	0.9.6
+%define release	%mkrel 0.1
 %define major 1
 %define libname %mklibname upower-glib %major
 %define develname %mklibname -d upower-glib
@@ -17,7 +17,16 @@ Summary: Power Management Service
 License: GPLv2+
 Group: System/Kernel and hardware
 URL:     http://upower.freedesktop.org/
-Source0: http://upower.freedesktop.org/releases/%{name}-%{version}.tar.bz2
+# To be deleted when 0.9.6 tarball is out
+Source0: http://upower.freedesktop.org/releases/%{name}-0.9.5.tar.bz2
+#Source0: http://upower.freedesktop.org/releases/%{name}-%{version}.tar.bz2
+
+# patches 100-... - upstream GIT patches to be removed in next release
+# (bor) update to current 0.9.6 GIT snapshot to fix upowerd crash
+#       git diff UPOWER_0_9_5..4a53c56a
+#       hand edited to remove RELEASE file
+Patch100:	upower-0.9.6-git-4a53c56a.patch
+
 BuildRoot: %_tmppath/%name-%version-%release-root
 Provides: %{oname} = %{version}-%{release}
 BuildRequires: libgudev-devel
@@ -67,7 +76,9 @@ Obsoletes: %olddevelname
 Headers and libraries for %{oname}
 
 %prep
-%setup -q
+# -n to be deleted when 0.9.6 tarball is out
+%setup -q -n %{name}-0.9.5
+%apply_patches
 
 %build
 %configure2_5x --enable-gtk-doc
