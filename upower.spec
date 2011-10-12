@@ -32,7 +32,7 @@ BuildRequires: gobject-introspection-devel
 BuildRequires: libimobiledevice-devel
 BuildRequires: gtk-doc
 %if %{_with_systemd}
-BuildRequires: systemd-units
+BuildRequires: systemd-units >= 37
 Requires(post): systemd-units
 Requires(post): systemd-sysvinit
 Requires(preun): systemd-units
