@@ -3,7 +3,7 @@
 %define name	upower
 %define oname	UPower
 %define version	0.9.14
-%define release	%mkrel 3
+%define release	%mkrel 4
 %define major 1
 %define libname %mklibname upower-glib %major
 %define develname %mklibname -d upower-glib
@@ -81,7 +81,7 @@ rm -rf %{buildroot}
 
 %if %{_with_systemd}
 install -m 0644 -D %{SOURCE1} %{buildroot}%{_unitdir}/upowerd.service
-sed -i -e 's#/usr/lib/#%{_libdir}#g' %{buildroot}%{_unitdir}/upowerd.service
+sed -i -e 's#/usr/lib#%{_libdir}#g' %{buildroot}%{_unitdir}/upowerd.service
 %endif
 
 %find_lang %name
@@ -93,7 +93,7 @@ rm -rf %{buildroot}
 %if %{_with_systemd}
 %post
 /bin/systemctl daemon-reload >/dev/null 2>&1 || :
-[ $1 -ge 1 -o $2 -ge 2 ]; then
+if [ $1 -ge 1 -o $2 -ge 2 ]; then
 /bin/systemctl enable upowerd.service >/dev/null 2>&1 || :
 /bin/systemctl try-restart upowerd.service >/dev/null 2>&1 || :
 fi
