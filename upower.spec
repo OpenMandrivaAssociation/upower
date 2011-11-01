@@ -3,7 +3,7 @@
 %define name	upower
 %define oname	UPower
 %define version	0.9.14
-%define release	%mkrel 5
+%define release	%mkrel 6
 %define major 1
 %define libname %mklibname upower-glib %major
 %define develname %mklibname -d upower-glib
@@ -93,14 +93,14 @@ rm -rf %{buildroot}
 %if %{_with_systemd}
 %post
 /bin/systemctl daemon-reload >/dev/null 2>&1 || :
-if [ "$1" -ge "1" -o "$2" -ge "2" ]; then
+if [ "$1" -ge 1 ]; then
 /bin/systemctl enable upowerd.service >/dev/null 2>&1 || :
 /bin/systemctl try-restart upowerd.service >/dev/null 2>&1 || :
 fi
 
 %postun
 /bin/systemctl daemon-reload >/dev/null 2>&1 || :
-if [ "$1" -ge "1" ] ; then
+if [ "$1" -ge 1 ] ; then
 /bin/systemctl try-restart upowerd.service >/dev/null 2>&1 || :
 fi
 
