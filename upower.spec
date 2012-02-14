@@ -1,9 +1,8 @@
-%define _with_systemd 1
 
 %define name	upower
 %define oname	UPower
 %define version	0.9.15
-%define release	%mkrel 1
+%define release	%mkrel 2
 %define major 1
 %define libname %mklibname upower-glib %major
 %define develname %mklibname -d upower-glib
@@ -18,7 +17,6 @@ License: GPLv2+
 Group: System/Kernel and hardware
 URL:     http://upower.freedesktop.org/
 Source0: http://upower.freedesktop.org/releases/%{name}-%{version}.tar.xz
-Source1: upowerd.service
 Provides: %{oname} = %{version}-%{release}
 BuildRequires: libgudev-devel
 BuildRequires: dbus-glib-devel
@@ -31,13 +29,6 @@ BuildRequires: docbook-style-xsl
 BuildRequires: gobject-introspection-devel
 BuildRequires: libimobiledevice-devel
 BuildRequires: gtk-doc
-%if %{_with_systemd}
-BuildRequires: systemd-units >= 37
-Requires(post): systemd-units
-Requires(post): systemd-sysvinit
-Requires(preun): systemd-units
-Requires(postun): systemd-units
-%endif
 Requires: pm-utils
 Obsoletes: devicekit-power
 
@@ -79,38 +70,10 @@ Headers and libraries for %{oname}
 rm -rf %{buildroot}
 %makeinstall_std
 
-%if %{_with_systemd}
-install -m 0644 -D %{SOURCE1} %{buildroot}%{_unitdir}/upowerd.service
-sed -i -e 's#/usr/lib#%{_libdir}#g' %{buildroot}%{_unitdir}/upowerd.service
-%endif
-
-%find_lang %name
+%find_lang %{name} %{name}.lang
 
 %clean
 rm -rf %{buildroot}
-
-
-%if %{_with_systemd}
-%post
-/bin/systemctl daemon-reload >/dev/null 2>&1 || :
-if [ "$1" -ge 1 ]; then
-/bin/systemctl enable upowerd.service >/dev/null 2>&1 || :
-/bin/systemctl try-restart upowerd.service >/dev/null 2>&1 || :
-fi
-
-%postun
-/bin/systemctl daemon-reload >/dev/null 2>&1 || :
-if [ "$1" -ge 1 ] ; then
-/bin/systemctl try-restart upowerd.service >/dev/null 2>&1 || :
-fi
-
-%preun
-if [ "$1" = "0" ]; then
-/bin/systemctl --no-reload upowerd.service > /dev/null 2>&1 || :
-/bin/systemctl stop upowerd.service > /dev/null 2>&1 || :
-fi
-
-%endif
 
 
 %files -f %name.lang
@@ -131,9 +94,6 @@ fi
 
 %{_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
-%if %{_with_systemd}
-%{_unitdir}/upowerd.service
-%endif
 
 %files -n %libname
 %defattr(-,root,root,-)
