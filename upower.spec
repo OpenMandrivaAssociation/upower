@@ -7,8 +7,8 @@
 %define olddevelname %mklibname -d devkit-power-gobject
 
 Name: upower
-Version: 0.9.14
-Release: 2
+Version: 0.9.15
+Release: 1
 Summary: Power Management Service
 License: GPLv2+
 Group: System/Kernel and hardware
