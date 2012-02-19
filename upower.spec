@@ -61,6 +61,7 @@ Headers and libraries for %{oname}
 %apply_patches
 
 %build
+aclocal
 autoconf
 automake
 
