@@ -8,7 +8,7 @@
 
 Name: upower
 Version: 0.9.15
-Release: 1
+Release: 2
 Summary: Power Management Service
 License: GPLv2+
 Group: System/Kernel and hardware
