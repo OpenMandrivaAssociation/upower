@@ -64,7 +64,11 @@ Headers and libraries for %{oname}
 libtoolize --copy --force
 autoreconf
 
-%configure2_5x --disable-dependency-tracking --enable-gtk-doc
+%configure2_5x \
+	--disable-dependency-tracking \
+	--enable-gtk-doc \
+	--disable-static
+
 %make
 
 %install
@@ -105,8 +109,6 @@ rm -rf %{buildroot}
 %{_datadir}/dbus-1/interfaces/*.xml
 %dir %{_datadir}/gtk-doc/html/UPower
 %{_datadir}/gtk-doc/html/UPower/*
-%{_libdir}/*.a
-%{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/upower-glib.pc
 %{_datadir}/gir-1.0/UPowerGlib-1.0.gir
