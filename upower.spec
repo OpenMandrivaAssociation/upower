@@ -61,9 +61,8 @@ Headers and libraries for %{oname}
 %apply_patches
 
 %build
-aclocal
-autoconf
-automake
+libtoolize --copy --force
+autoreconf
 
 %configure2_5x --disable-dependency-tracking --enable-gtk-doc
 %make
