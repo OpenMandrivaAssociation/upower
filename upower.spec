@@ -1,22 +1,20 @@
 
-%define name	upower
 %define oname	UPower
-%define version	0.9.15
-%define release	%mkrel 2
 %define major 1
 %define libname %mklibname upower-glib %major
 %define develname %mklibname -d upower-glib
 %define oldlibname %mklibname devkit-power-gobject 1
 %define olddevelname %mklibname -d devkit-power-gobject
 
-Name: %name
-Version: %version
-Release: %release
+Name: upower
+Version: 0.9.14
+Release: 2
 Summary: Power Management Service
 License: GPLv2+
 Group: System/Kernel and hardware
 URL:     http://upower.freedesktop.org/
 Source0: http://upower.freedesktop.org/releases/%{name}-%{version}.tar.xz
+Patch0: upower-0.9.15-add-gmodule-link.patch
 Provides: %{oname} = %{version}-%{release}
 BuildRequires: libgudev-devel
 BuildRequires: dbus-glib-devel
@@ -63,6 +61,9 @@ Headers and libraries for %{oname}
 %apply_patches
 
 %build
+autoconf
+automake
+
 %configure2_5x --disable-dependency-tracking --enable-gtk-doc
 %make
 
@@ -80,8 +81,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 
 %doc README AUTHORS NEWS HACKING
-%dir %_sysconfdir/UPower/
-%config(noreplace) %_sysconfdir/UPower/UPower.conf
+%dir %{_sysconfdir}/UPower/
+%config(noreplace) %{_sysconfdir}/UPower/UPower.conf
 %{_sysconfdir}/dbus-1/system.d/*.conf
 /lib/udev/rules.d/*.rules
 
