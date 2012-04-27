@@ -106,7 +106,7 @@ autoreconf
 %{_libdir}/libupower-glib.so.%{major}*
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/UPowerGlib-%{girmajor).typelib
+%{_libdir}/girepository-1.0/UPowerGlib-%{girmajor}.typelib
 
 %files -n %{develname}
 %{_includedir}/libupower-glib
