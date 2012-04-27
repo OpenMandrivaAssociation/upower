@@ -115,5 +115,5 @@ autoreconf
 %{_datadir}/dbus-1/interfaces/*.xml
 %dir %{_datadir}/gtk-doc/html/UPower
 %{_datadir}/gtk-doc/html/UPower/*
-%{_datadir}/gir-1.0/UPowerGlib-%{girmajor).gir
+%{_datadir}/gir-1.0/UPowerGlib-%{girmajor}.gir
 
