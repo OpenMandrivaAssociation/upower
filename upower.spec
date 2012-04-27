@@ -12,7 +12,7 @@
 Summary: Power Management Service
 Name: upower
 Version: 0.9.15
-Release: 3
+Release: 4
 License: GPLv2+
 Group: System/Kernel and hardware
 URL:     http://upower.freedesktop.org/
@@ -52,7 +52,7 @@ managing power devices attached to the system.
 %package -n %{girname}
 Summary: GObject Introspection interface description for %{name}
 Group: System/Libraries
-Conflicts: %{_lib}upower-glib1 < 0.9.15.3
+Conflicts: %{_lib}upower-glib1 < 0.9.15-3
 
 %description -n %{girname}
 GObject Introspection interface description for %{name}.
