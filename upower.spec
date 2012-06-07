@@ -14,7 +14,7 @@
 Summary: Power Management Service
 Name: upower
 Version: 0.9.16
-Release: 2
+Release: 3
 License: GPLv2+
 Group: System/Kernel and hardware
 URL:     http://upower.freedesktop.org/
@@ -128,6 +128,7 @@ fi
 %config(noreplace) %{_sysconfdir}/UPower/UPower.conf
 %{_sysconfdir}/dbus-1/system.d/*.conf
 /lib/udev/rules.d/*.rules
+%{_localstatedir}/lib/upower
 %{_bindir}/*
 %{_libexecdir}/upowerd
 %{_datadir}/polkit-1/actions/*.policy
