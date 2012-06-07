@@ -9,71 +9,71 @@
 %define oldlibname %mklibname devkit-power-gobject 1
 %define olddevelname %mklibname -d devkit-power-gobject
 
-%define _with_systemd 1
+%bcond_without	systemd
 
-Summary: Power Management Service
-Name: upower
-Version: 0.9.16
-Release: 3
-License: GPLv2+
-Group: System/Kernel and hardware
-URL:     http://upower.freedesktop.org/
-Source0: http://upower.freedesktop.org/releases/%{name}-%{version}.tar.xz
-Source1: upowerd.service
-Patch0: upower-0.9.15-add-gmodule-link.patch
+Summary:	Power Management Service
+Name:		upower
+Version:	0.9.16
+Release:	3
+License:	GPLv2+
+Group:		System/Kernel and hardware
+URL:		http://upower.freedesktop.org/
+Source0:	http://upower.freedesktop.org/releases/%{name}-%{version}.tar.xz
+Source1:	upowerd.service
+Patch0:		upower-0.9.15-add-gmodule-link.patch
 
-BuildRequires: docbook-style-xsl
-BuildRequires: gettext
-BuildRequires: gtk-doc
-BuildRequires: intltool
-BuildRequires: xsltproc
-BuildRequires: pkgconfig(dbus-glib-1)
-BuildRequires: pkgconfig(gudev-1.0)
-BuildRequires: pkgconfig(gobject-introspection-1.0)
-BuildRequires: pkgconfig(libimobiledevice-1.0)
-BuildRequires: pkgconfig(libusb-1.0)
-BuildRequires: pkgconfig(polkit-gobject-1)
-%if %{_with_systemd} 	 
-BuildRequires: systemd-units >= 37 	 
-Requires(post,preun,postun): systemd-units 	 
-Requires(post): systemd-sysvinit 	 
+BuildRequires:	docbook-style-xsl
+BuildRequires:	gettext
+BuildRequires:	gtk-doc
+BuildRequires:	intltool
+BuildRequires:	xsltproc
+BuildRequires:	pkgconfig(dbus-glib-1)
+BuildRequires:	pkgconfig(gudev-1.0)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(libimobiledevice-1.0)
+BuildRequires:	pkgconfig(libusb-1.0)
+BuildRequires:	pkgconfig(polkit-gobject-1)
+%if %{with systemd}
+BuildRequires:	systemd-units >= 37
+Requires(post,preun,postun): systemd-units
+Requires(post):	systemd-sysvinit
 %endif
 
-Requires: pm-utils
-Requires: suspend
-Provides: %{oname} = %{version}-%{release}
-Obsoletes: devicekit-power
+Requires:	pm-utils
+Requires:	suspend
+Provides:	%{oname} = %{version}-%{release}
+Obsoletes:	devicekit-power
 
 %description
 %{oname} provides a daemon, API and command line tools for
 managing power devices attached to the system.
 
-%package -n %{libname}
-Summary: Shared Library of %{oname}
-Group: System/Libraries
-Obsoletes: %oldlibname
+%package -n	%{libname}
+Summary:	Shared Library of %{oname}
+Group:		System/Libraries
+Obsoletes:	%{oldlibname}
 
 %description -n %{libname}
 %{oname} provides a daemon, API and command line tools for
 managing power devices attached to the system.
 
-%package -n %{girname}
-Summary: GObject Introspection interface description for %{name}
-Group: System/Libraries
-Conflicts: %{_lib}upower-glib1 < 0.9.15-3
+%package -n	%{girname}
+Summary:	GObject Introspection interface description for %{name}
+Group:		System/Libraries
+Conflicts:	%{_lib}upower-glib1 < 0.9.15-3
 
-%description -n %{girname}
+%description -n	%{girname}
 GObject Introspection interface description for %{name}.
 
-%package -n %{develname}
-Summary: Headers and libraries for %{oname}
-Group: Development/C
-Provides: %{oname}-devel = %{version}-%{release}
-Requires: %{libname} = %{version}-%{release}
-Requires: %{girname} = %{version}
-Obsoletes: %olddevelname
+%package -n	%{develname}
+Summary:	Headers and libraries for %{oname}
+Group:		Development/C
+Provides:	%{oname}-devel = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
+Requires:	%{girname} = %{version}
+Obsoletes:	%{olddevelname}
 
-%description -n %{develname}
+%description -n	%{develname}
 Headers and libraries for %{oname}
 
 %prep
@@ -94,32 +94,32 @@ autoreconf
 %install
 %makeinstall_std
 
-%if %{_with_systemd}
-install -m 0644 -D %{SOURCE1} %{buildroot}%{_unitdir}/upowerd.service 	 
-sed -i -e 's#/usr/lib#%{_libdir}#g' %{buildroot}%{_unitdir}/upowerd.service 	 
+%if %{with systemd}
+install -m644 %{SOURCE1} -D %{buildroot}%{_unitdir}/upowerd.service
+sed -e 's#/usr/lib/#%{_libexecdir}#g' -i %{buildroot}%{_unitdir}/upowerd.service
 %endif
 
 %find_lang %{name} %{name}.lang
 
-%if %{_with_systemd} 	 
+%if %{with systemd}
 %post 	 
-/bin/systemctl daemon-reload >/dev/null 2>&1 || : 	 
-if [ "$1" -ge 1 ]; then 	 
-	/bin/systemctl enable upowerd.service >/dev/null 2>&1 || : 	 
-	/bin/systemctl try-restart upowerd.service >/dev/null 2>&1 || : 	 
-fi 	 
- 	 
-%postun 	 
-/bin/systemctl daemon-reload >/dev/null 2>&1 || : 	 
-if [ "$1" -ge 1 ] ; then 	 
-	/bin/systemctl try-restart upowerd.service >/dev/null 2>&1 || : 	 
-fi 	 
-  	 
-%preun 	 
-if [ "$1" = "0" ]; then 	 
-	/bin/systemctl --no-reload upowerd.service > /dev/null 2>&1 || : 	 
-	/bin/systemctl stop upowerd.service > /dev/null 2>&1 || : 	 
-fi 	 
+/bin/systemctl daemon-reload >/dev/null 2>&1 || :
+if [ "$1" -ge 1 ]; then
+	/bin/systemctl enable upowerd.service >/dev/null 2>&1 || :
+	/bin/systemctl try-restart upowerd.service >/dev/null 2>&1 || :
+fi
+ 
+%postun
+/bin/systemctl daemon-reload >/dev/null 2>&1 || :
+if [ "$1" -ge 1 ] ; then
+	/bin/systemctl try-restart upowerd.service >/dev/null 2>&1 || :
+fi
+ 
+%preun
+if [ "$1" = "0" ]; then
+	/bin/systemctl --no-reload upowerd.service > /dev/null 2>&1 || :
+	/bin/systemctl stop upowerd.service > /dev/null 2>&1 || :
+fi
 %endif
 
 %files -f %{name}.lang
@@ -133,8 +133,8 @@ fi
 %{_libexecdir}/upowerd
 %{_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
-%if %{_with_systemd} 	 
-%{_unitdir}/upowerd.service 	 
+%if %{with systemd}
+%{_unitdir}/upowerd.service
 %endif
 %{_mandir}/man1/*
 %{_mandir}/man7/*
@@ -154,4 +154,3 @@ fi
 %dir %{_datadir}/gtk-doc/html/UPower
 %{_datadir}/gtk-doc/html/UPower/*
 %{_datadir}/gir-1.0/UPowerGlib-%{girmajor}.gir
-
