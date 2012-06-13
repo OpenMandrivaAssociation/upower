@@ -4,10 +4,10 @@
 %define girmajor 1.0
 %define libname %mklibname upower-glib %{major}
 %define girname %mklibname upower-glib-gir %{girmajor}
-%define develname %mklibname -d upower-glib
+%define devname %mklibname -d upower-glib
 
 %define oldlibname %mklibname devkit-power-gobject 1
-%define olddevelname %mklibname -d devkit-power-gobject
+%define olddevname %mklibname -d devkit-power-gobject
 
 Summary:	Power Management Service
 Name:		upower
@@ -59,15 +59,15 @@ Conflicts:	%{_lib}upower-glib1 < 0.9.15-3
 %description -n	%{girname}
 GObject Introspection interface description for %{name}.
 
-%package -n	%{develname}
+%package -n	%{devname}
 Summary:	Headers and libraries for %{oname}
 Group:		Development/C
 Provides:	%{oname}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
 Requires:	%{girname} = %{version}
-Obsoletes:	%{olddevelname}
+Obsoletes:	%{olddevname}
 
-%description -n	%{develname}
+%description -n	%{devname}
 Headers and libraries for %{oname}
 
 %prep
@@ -77,7 +77,7 @@ Headers and libraries for %{oname}
 %configure \
 	--enable-gtk-doc \
 	--disable-static \
-	--enable-introspection 
+	--enable-introspection \
 	--with-systemdsystemunitdir=%{_systemunitdir}
 
 %make
@@ -128,7 +128,7 @@ fi
 %files -n %{girname}
 %{_libdir}/girepository-1.0/UPowerGlib-%{girmajor}.typelib
 
-%files -n %{develname}
+%files -n %{devname}
 %{_includedir}/libupower-glib
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/upower-glib.pc
