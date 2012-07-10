@@ -12,7 +12,7 @@
 Summary:	Power Management Service
 Name:		upower
 Version:	0.9.17
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
@@ -24,13 +24,14 @@ BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	xsltproc
 BuildRequires:	pkgconfig(dbus-glib-1)
-BuildRequires:	pkgconfig(gudev-1.0)
+BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libimobiledevice-1.0)
 BuildRequires:	pkgconfig(libusb-1.0)
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	systemd-units >= 37
 Requires(post,preun,postun): systemd-units
+Requires(post,preun):	rpm-helper
 Requires(post):	systemd-sysvinit
 
 Requires:	pm-utils
@@ -42,7 +43,7 @@ Obsoletes:	devicekit-power
 %{oname} provides a daemon, API and command line tools for
 managing power devices attached to the system.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	Shared Library of %{oname}
 Group:		System/Libraries
 Obsoletes:	%{oldlibname}
@@ -51,7 +52,7 @@ Obsoletes:	%{oldlibname}
 %{oname} provides a daemon, API and command line tools for
 managing power devices attached to the system.
 
-%package -n	%{girname}
+%package -n %{girname}
 Summary:	GObject Introspection interface description for %{name}
 Group:		System/Libraries
 Conflicts:	%{_lib}upower-glib1 < 0.9.15-3
@@ -59,7 +60,7 @@ Conflicts:	%{_lib}upower-glib1 < 0.9.15-3
 %description -n	%{girname}
 GObject Introspection interface description for %{name}.
 
-%package -n	%{devname}
+%package -n %{devname}
 Summary:	Headers and libraries for %{oname}
 Group:		Development/C
 Provides:	%{oname}-devel = %{version}-%{release}
@@ -87,7 +88,7 @@ Headers and libraries for %{oname}
 
 %find_lang %{name} %{name}.lang
 
-%post 	 
+%post
 /bin/systemctl daemon-reload >/dev/null 2>&1 || :
 if [ "$1" -ge 1 ]; then
 	/bin/systemctl enable upower.service >/dev/null 2>&1 || :
@@ -99,7 +100,7 @@ fi
 if [ "$1" -ge 1 ] ; then
 	/bin/systemctl try-restart upower.service >/dev/null 2>&1 || :
 fi
- 
+
 %preun
 if [ "$1" = "0" ]; then
 	/bin/systemctl --no-reload upower.service > /dev/null 2>&1 || :
