@@ -1,4 +1,4 @@
-%define oname	UPower
+%define oname UPower
 
 %define major 1
 %define girmajor 1.0
@@ -11,8 +11,8 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.9.17
-Release:	2
+Version:	0.9.18
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
@@ -30,7 +30,7 @@ BuildRequires:	pkgconfig(libimobiledevice-1.0)
 BuildRequires:	pkgconfig(libusb-1.0)
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	systemd-units >= 37
-Requires(post,preun,postun): systemd-units
+Requires(post,preun,postun):	systemd-units
 Requires(post,preun):	rpm-helper
 Requires(post):	systemd-sysvinit
 
@@ -65,7 +65,7 @@ Summary:	Headers and libraries for %{oname}
 Group:		Development/C
 Provides:	%{oname}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
-Requires:	%{girname} = %{version}
+Requires:	%{girname} = %{version}-%{release}
 Obsoletes:	%{olddevname}
 
 %description -n	%{devname}
@@ -75,37 +75,24 @@ Headers and libraries for %{oname}
 %setup -q
 
 %build
-%configure \
+%configure2_5x \
 	--enable-gtk-doc \
 	--disable-static \
 	--enable-introspection \
-	--with-systemdsystemunitdir=%{_systemunitdir}
+	--with-systemdsystemunitdir=%{_unitdir}
 
 %make
 
 %install
 %makeinstall_std
 
-%find_lang %{name} %{name}.lang
+%find_lang %{name}
 
 %post
-/bin/systemctl daemon-reload >/dev/null 2>&1 || :
-if [ "$1" -ge 1 ]; then
-	/bin/systemctl enable upower.service >/dev/null 2>&1 || :
-	/bin/systemctl try-restart upower.service >/dev/null 2>&1 || :
-fi
- 
-%postun
-/bin/systemctl daemon-reload >/dev/null 2>&1 || :
-if [ "$1" -ge 1 ] ; then
-	/bin/systemctl try-restart upower.service >/dev/null 2>&1 || :
-fi
+%_post_service %{name}
 
 %preun
-if [ "$1" = "0" ]; then
-	/bin/systemctl --no-reload upower.service > /dev/null 2>&1 || :
-	/bin/systemctl stop upower.service > /dev/null 2>&1 || :
-fi
+%_postun_service %{name}
 
 %files -f %{name}.lang
 %doc README AUTHORS NEWS HACKING
