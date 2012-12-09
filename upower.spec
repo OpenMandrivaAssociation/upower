@@ -12,7 +12,7 @@
 Summary:	Power Management Service
 Name:		upower
 Version:	0.9.18
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
@@ -30,6 +30,7 @@ BuildRequires:	pkgconfig(libimobiledevice-1.0)
 BuildRequires:	pkgconfig(libusb-1.0)
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	systemd-units >= 37
+BuildRequires:	pkgconfig(systemd)
 Requires(post,preun,postun):	systemd-units
 Requires(post,preun):	rpm-helper
 Requires(post):	systemd-sysvinit
@@ -38,6 +39,7 @@ Requires:	pm-utils
 Requires:	suspend
 Provides:	%{oname} = %{version}-%{release}
 Obsoletes:	devicekit-power
+Provides:  devicekit-power
 
 %description
 %{oname} provides a daemon, API and command line tools for
@@ -78,8 +80,8 @@ Headers and libraries for %{oname}
 %configure2_5x \
 	--enable-gtk-doc \
 	--disable-static \
-	--enable-introspection \
-	--with-systemdsystemunitdir=%{_unitdir}
+#	--enable-introspection \
+#	--with-systemdsystemunitdir=%{_unitdir}
 
 %make
 
@@ -106,6 +108,7 @@ Headers and libraries for %{oname}
 %{_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
 %{_unitdir}/upower.service
+/lib/systemd/system-sleep/notify-upower.sh
 %{_mandir}/man1/*
 %{_mandir}/man7/*
 %{_mandir}/man8/*
