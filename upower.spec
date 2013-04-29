@@ -36,7 +36,9 @@ Requires(post,preun):	rpm-helper
 Requires(post):	systemd-sysvinit
 
 Requires:	pm-utils
+%ifnarch	%arm
 Requires:	suspend
+%endif
 Provides:	%{oname} = %{version}-%{release}
 Obsoletes:	devicekit-power
 Provides:  devicekit-power
