@@ -11,7 +11,7 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.9.19
+Version:	0.9.20
 Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
@@ -34,14 +34,15 @@ BuildRequires:	pkgconfig(systemd)
 Requires(post,preun,postun):	systemd-units
 Requires(post,preun):	rpm-helper
 Requires(post):	systemd-sysvinit
-
-Requires:	pm-utils
-%ifnarch	%arm
-Requires:	suspend
-%endif
+# As i know now suspend provides by systemd
+# systemd for suspend and hibernate 
+# fedya
+Requires:	polkit
+Requires:	udev
+Requires:	gobject-introspection
 Provides:	%{oname} = %{version}-%{release}
 Obsoletes:	devicekit-power
-Provides:  devicekit-power
+Provides:	devicekit-power
 
 %description
 %{oname} provides a daemon, API and command line tools for
@@ -82,7 +83,7 @@ Headers and libraries for %{oname}
 %configure2_5x \
 	--enable-gtk-doc \
 	--disable-static \
-#	--enable-introspection \
+	--enable-introspection
 #	--with-systemdsystemunitdir=%{_unitdir}
 
 %make

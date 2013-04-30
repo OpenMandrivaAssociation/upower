@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   upower-0.9.19.tar.xz: 29c53be726d381b73b385f37454367fae126fe86
+sources:
+  upower-0.9.20.tar.xz: 960ce9b3feaabf743c1070ec260e761176c0411e
