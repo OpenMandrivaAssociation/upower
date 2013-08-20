@@ -12,7 +12,7 @@
 Summary:	Power Management Service
 Name:		upower
 Version:	0.9.21
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
@@ -41,8 +41,7 @@ Requires:	polkit
 Requires:	udev
 Requires:	gobject-introspection
 Provides:	%{oname} = %{version}-%{release}
-Obsoletes:	devicekit-power
-Provides:	devicekit-power
+%rename		devicekit-power
 
 %description
 %{oname} provides a daemon, API and command line tools for
@@ -74,7 +73,7 @@ Requires:	%{girname} = %{version}-%{release}
 Obsoletes:	%{olddevname}
 
 %description -n	%{devname}
-Headers and libraries for %{oname}
+Headers and libraries for %{oname}.
 
 %prep
 %setup -q
@@ -84,7 +83,6 @@ Headers and libraries for %{oname}
 	--enable-gtk-doc \
 	--disable-static \
 	--enable-introspection
-#	--with-systemdsystemunitdir=%{_unitdir}
 
 %make
 
