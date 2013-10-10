@@ -84,7 +84,7 @@ Headers and libraries for %{oname}.
 	--disable-static \
 	--enable-introspection
 
-%make
+%make -j1
 
 %install
 %makeinstall_std
