@@ -11,8 +11,8 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.9.21
-Release:	2
+Version:	0.9.22
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
