@@ -12,11 +12,12 @@
 Summary:	Power Management Service
 Name:		upower
 Version:	0.9.23
-Release:	5
+Release:	6
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
 Source0:	http://upower.freedesktop.org/releases/%{name}-%{version}.tar.xz
+Patch0:		upower-0.9.23-dont-hardcore-path-to-dbus-send.patch
 
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext
@@ -77,11 +78,11 @@ Headers and libraries for %{oname}.
 
 %prep
 %setup -q
+%patch0 -p1 -b .nousrbin~
 
 %build
 %configure2_5x \
 	--enable-gtk-doc \
-	--disable-static \
 	--enable-introspection
 
 %make -j1
