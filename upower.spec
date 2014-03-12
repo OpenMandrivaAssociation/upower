@@ -85,7 +85,7 @@ Headers and libraries for %{oname}.
 	--enable-gtk-doc \
 	--enable-introspection
 
-%make -j1
+%make
 
 %install
 %makeinstall_std
