@@ -82,6 +82,7 @@ Headers and libraries for %{oname}.
 
 %build
 %configure2_5x \
+	--disable-static \
 	--enable-gtk-doc \
 	--enable-introspection
 
