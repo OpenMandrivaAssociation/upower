@@ -1,6 +1,6 @@
 %define oname UPower
 
-%define major 1
+%define major 2
 %define girmajor 1.0
 %define libname %mklibname upower-glib %{major}
 %define girname %mklibname upower-glib-gir %{girmajor}
@@ -11,13 +11,13 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.9.23
-Release:	6
+Version:	0.99.0
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
 Source0:	http://upower.freedesktop.org/releases/%{name}-%{version}.tar.xz
-Patch0:		upower-0.9.23-dont-hardcore-path-to-dbus-send.patch
+Patch0:		0001-lib-Fix-segfault-on-getting-property-when-daemon-is-.patch
 
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext
@@ -78,10 +78,10 @@ Headers and libraries for %{oname}.
 
 %prep
 %setup -q
-%patch0 -p1 -b .nousrbin~
+%apply_patches
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static \
 	--enable-gtk-doc \
 	--enable-introspection
@@ -108,10 +108,9 @@ Headers and libraries for %{oname}.
 %{_localstatedir}/lib/upower
 %{_bindir}/*
 %{_libexecdir}/upowerd
-%{_datadir}/polkit-1/actions/*.policy
+#% {_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
 %{_unitdir}/upower.service
-/lib/systemd/system-sleep/notify-upower.sh
 %{_mandir}/man1/*
 %{_mandir}/man7/*
 %{_mandir}/man8/*
