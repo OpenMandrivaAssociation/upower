@@ -1,6 +1,6 @@
 %define oname UPower
 
-%define major 2
+%define major 3
 %define girmajor 1.0
 %define libname %mklibname upower-glib %{major}
 %define girname %mklibname upower-glib-gir %{girmajor}
@@ -11,13 +11,13 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.99.0
-Release:	3
+Version:	0.99.1
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
 Source0:	http://upower.freedesktop.org/releases/%{name}-%{version}.tar.xz
-Patch0:		0001-lib-Fix-segfault-on-getting-property-when-daemon-is-.patch
+#Patch0:		0001-lib-Fix-segfault-on-getting-property-when-daemon-is-.patch
 
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext
@@ -82,7 +82,6 @@ Headers and libraries for %{oname}.
 
 %build
 %configure \
-	--disable-static \
 	--enable-gtk-doc \
 	--enable-introspection
 
