@@ -4,5 +4,6 @@ removed_sources:
   upower-0.9.21.tar.xz: 288c1ea5c99379fb570f3d07f7284e60549ade49
   upower-0.9.22.tar.xz: 896cab57ceb92ad788fd74348b7b0450ef426150
   upower-0.9.23.tar.xz: 8fc30c2d53b15c0a4e7c1bc077a912bc1aeb6138
-sources:
   upower-0.99.0.tar.xz: 358dd0c8fd4d1a3f3b1be2f9f328e0fddfb6feb4
+sources:
+  upower-0.99.1.tar.xz: 94570b8c6e4fdd4c6d288d2c47d89879df43697b
