@@ -12,13 +12,13 @@
 Summary:	Power Management Service
 Name:		upower
 Version:	0.99.1
-Release:	2
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
 Source0:	http://upower.freedesktop.org/releases/%{name}-%{version}.tar.xz
 #Patch0:		0001-lib-Fix-segfault-on-getting-property-when-daemon-is-.patch
-Patch1:		00git_clamp_percentage.patch
+
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext
 BuildRequires:	gtk-doc
