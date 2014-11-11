@@ -11,13 +11,14 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.9.22
-Release:	2.1
+Version:	0.9.23
+Release:	6.1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
 Source0:	http://upower.freedesktop.org/releases/%{name}-%{version}.tar.xz
-Patch0:		00git_clamp_percentage.patch
+Patch0:		upower-0.9.23-dont-hardcore-path-to-dbus-send.patch
+Patch1:		00git_clamp_percentage.patch
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext
 BuildRequires:	gtk-doc
@@ -81,11 +82,11 @@ Headers and libraries for %{oname}.
 
 %build
 %configure2_5x \
-	--enable-gtk-doc \
 	--disable-static \
+	--enable-gtk-doc \
 	--enable-introspection
 
-%make -j1
+%make
 
 %install
 %makeinstall_std
@@ -93,10 +94,10 @@ Headers and libraries for %{oname}.
 %find_lang %{name}
 
 %post
-%_post_service %{name}
+%systemd_post %{name}
 
 %preun
-%_postun_service %{name}
+%systemd_preun %{name}
 
 %files -f %{name}.lang
 %doc README AUTHORS NEWS HACKING
