@@ -11,8 +11,8 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.99.2
-Release:	2
+Version:	0.99.3
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
@@ -32,11 +32,8 @@ BuildRequires:	pkgconfig(libusb-1.0)
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	systemd-units >= 37
 BuildRequires:	pkgconfig(systemd)
-Requires(post,preun,postun):	systemd-units
-Requires(post,preun):	rpm-helper
-Requires(post):	systemd-sysvinit
 # As i know now suspend provides by systemd
-# systemd for suspend and hibernate 
+# systemd for suspend and hibernate
 # fedya
 Requires:	polkit
 Requires:	udev
@@ -91,12 +88,6 @@ Headers and libraries for %{oname}.
 %makeinstall_std
 
 %find_lang %{name}
-
-%post
-%systemd_post %{name}
-
-%preun
-%systemd_postun %{name}
 
 %files -f %{name}.lang
 %doc README AUTHORS NEWS HACKING
