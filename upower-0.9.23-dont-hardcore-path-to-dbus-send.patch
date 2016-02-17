@@ -1,9 +1,0 @@
---- upower-0.9.23/src/notify-upower.sh~	2013-10-18 16:41:24.000000000 +0200
-+++ upower-0.9.23/src/notify-upower.sh	2014-03-13 00:34:38.508938848 +0100
-@@ -1,5 +1,5 @@
- #!/bin/bash
--[ "$1" = "post" ] && exec /usr/bin/dbus-send	\
-+[ "$1" = "post" ] && exec dbus-send		\
- 	--system --type=signal			\
- 	--dest=org.freedesktop.UPower		\
- 	/org/freedesktop/UPower			\
