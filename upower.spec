@@ -11,7 +11,7 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.99.4
+Version:	0.99.5
 Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
