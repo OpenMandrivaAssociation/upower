@@ -11,7 +11,7 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.99.5
+Version:	0.99.6
 Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
@@ -28,7 +28,6 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libimobiledevice-1.0)
 BuildRequires:	pkgconfig(libusb-1.0)
 BuildRequires:	pkgconfig(polkit-gobject-1)
-BuildRequires:	systemd-units >= 37
 BuildRequires:	pkgconfig(systemd)
 # As i know now suspend provides by systemd
 # systemd for suspend and hibernate
