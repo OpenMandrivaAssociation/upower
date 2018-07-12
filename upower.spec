@@ -82,7 +82,7 @@ Headers and libraries for %{oname}.
 %make
 
 %install
-%makeinstall_std
+%makeinstall_std udevrulesdir="/lib/udev/rules.d/"
 
 %find_lang %{name}
 
