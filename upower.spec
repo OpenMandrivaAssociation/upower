@@ -11,7 +11,7 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.99.7
+Version:	0.99.9
 Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
@@ -56,7 +56,7 @@ Summary:	GObject Introspection interface description for %{name}
 Group:		System/Libraries
 Conflicts:	%{_lib}upower-glib1 < 0.9.15-3
 
-%description -n	%{girname}
+%description -n %{girname}
 GObject Introspection interface description for %{name}.
 
 %package -n %{devname}
@@ -67,22 +67,21 @@ Requires:	%{libname} = %{version}-%{release}
 Requires:	%{girname} = %{version}-%{release}
 Obsoletes:	%{olddevname}
 
-%description -n	%{devname}
+%description -n %{devname}
 Headers and libraries for %{oname}.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
 %configure \
 	--enable-gtk-doc \
 	--enable-introspection
 
-%make
+%make_build
 
 %install
-%makeinstall_std udevrulesdir="/lib/udev/rules.d/"
+%make_install udevrulesdir="/lib/udev/rules.d/"
 
 %find_lang %{name}
 
