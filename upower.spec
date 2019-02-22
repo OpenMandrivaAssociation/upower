@@ -11,12 +11,12 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.99.9
-Release:	3
+Version:	0.99.10
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
-Source0:	http://upower.freedesktop.org/releases/%{name}-%{version}.tar.xz
+Source0:	https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext
 BuildRequires:	gtk-doc
@@ -83,6 +83,11 @@ Headers and libraries for %{oname}.
 %install
 %make_install udevrulesdir="/lib/udev/rules.d/"
 
+install -d %{buildroot}%{_presetdir}
+cat > %{buildroot}%{_presetdir}/86-upower.preset << EOF
+enable upower.service
+EOF
+
 %find_lang %{name}
 
 %files -f %{name}.lang
@@ -96,6 +101,7 @@ Headers and libraries for %{oname}.
 %{_libexecdir}/upowerd
 #% {_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
+%{_presetdir}/86-upower.preset
 %{_unitdir}/upower.service
 %{_mandir}/man1/*
 %{_mandir}/man7/*
