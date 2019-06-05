@@ -12,11 +12,12 @@
 Summary:	Power Management Service
 Name:		upower
 Version:	0.99.10
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
 Source0:	https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
+Patch0:		04ee9afb58db5e9c4a9c7341a58ad729f261d229.patch
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext
 BuildRequires:	gtk-doc
