@@ -11,24 +11,20 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.99.13
+Version:	0.99.15
 Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
-Source0:	https://gitlab.freedesktop.org/upower/upower/uploads/%{name}-%{version}.tar.xz
-BuildRequires:	docbook-style-xsl
-BuildRequires:	gettext
+Source0:	https://gitlab.freedesktop.org/upower/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.bz2
 BuildRequires:	gtk-doc
-BuildRequires:	intltool
 BuildRequires:	xsltproc
-BuildRequires:	pkgconfig(dbus-glib-1)
+BuildRequires:	meson
 BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libimobiledevice-1.0)
-BuildRequires:	pkgconfig(libusb-1.0)
-BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(systemd)
+BuildRequires:	systemd-rpm-macros
 # As i know now suspend provides by systemd
 # systemd for suspend and hibernate
 # fedya
@@ -70,17 +66,18 @@ Obsoletes:	%{olddevname}
 Headers and libraries for %{oname}.
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-v%{version}
 
 %build
-%configure \
-	--enable-gtk-doc \
-	--enable-introspection
+%meson \
+  -Dman=true \
+  -Dgtk-doc=true \
+  -Dintrospection=enabled
 
-%make_build
+%meson_build
 
 %install
-%make_install udevrulesdir="/lib/udev/rules.d/"
+%meson_install
 
 %find_lang %{name}
 
@@ -89,16 +86,16 @@ Headers and libraries for %{oname}.
 %dir %{_sysconfdir}/UPower/
 %config(noreplace) %{_sysconfdir}/UPower/UPower.conf
 %{_datadir}/dbus-1/system.d/*.conf
-/lib/udev/rules.d/*.rules
+%{_udevrulesdir}/*.rules
 %{_localstatedir}/lib/upower
 %{_bindir}/*
 %{_libexecdir}/upowerd
 #% {_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
 %{_unitdir}/upower.service
-%{_mandir}/man1/*
-%{_mandir}/man7/*
-%{_mandir}/man8/*
+%doc %{_mandir}/man1/*
+%doc %{_mandir}/man7/*
+%doc %{_mandir}/man8/*
 
 %files -n %{libname}
 %{_libdir}/libupower-glib.so.%{major}*
