@@ -11,7 +11,7 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	0.99.17
+Version:	0.99.18
 Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
@@ -23,6 +23,7 @@ BuildRequires:	meson
 BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libimobiledevice-1.0)
+BuildRequires:	python3dist(python-dbusmock)
 BuildRequires:	pkgconfig(systemd)
 BuildRequires:	systemd-rpm-macros
 # As i know now suspend provides by systemd
@@ -87,10 +88,10 @@ Headers and libraries for %{oname}.
 %config(noreplace) %{_sysconfdir}/UPower/UPower.conf
 %{_datadir}/dbus-1/system.d/*.conf
 %{_udevrulesdir}/*.rules
+%{_udevhwdbdir}/*.hwdb
 %{_localstatedir}/lib/upower
 %{_bindir}/*
 %{_libexecdir}/upowerd
-#% {_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
 %{_unitdir}/upower.service
 %doc %{_mandir}/man1/*
