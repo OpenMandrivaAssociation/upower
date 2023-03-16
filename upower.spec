@@ -12,7 +12,7 @@
 Summary:	Power Management Service
 Name:		upower
 Version:	1.90.0
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
@@ -81,6 +81,15 @@ Headers and libraries for %{oname}.
 %meson_install
 
 %find_lang %{name}
+
+%post
+%systemd_post upower.service
+ 
+%preun
+%systemd_preun upower.service
+ 
+%postun
+%systemd_postun_with_restart upower.service
 
 %files -f %{name}.lang
 %doc README AUTHORS NEWS HACKING
