@@ -11,8 +11,8 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	1.90.0
-Release:	3
+Version:	1.90.2
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
@@ -101,8 +101,12 @@ Headers and libraries for %{oname}.
 %{_localstatedir}/lib/upower
 %{_bindir}/*
 %{_libexecdir}/upowerd
+%dir %{_libexecdir}/%{name}
+%{_libexecdir}/%{name}/*
 %{_datadir}/dbus-1/system-services/*.service
 %{_unitdir}/upower.service
+%dir %{_datadir}/installed-tests/%{name}
+%{_datadir}/installed-tests/%{name}/*test
 %doc %{_mandir}/man1/*
 %doc %{_mandir}/man7/*
 %doc %{_mandir}/man8/*
