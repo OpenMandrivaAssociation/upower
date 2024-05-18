@@ -17,6 +17,8 @@ License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://upower.freedesktop.org/
 Source0:	https://gitlab.freedesktop.org/upower/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.bz2
+BuildRequires:	intltool
+BuildRequires:	gettext
 BuildRequires:	gtk-doc
 BuildRequires:	xsltproc
 BuildRequires:	meson
