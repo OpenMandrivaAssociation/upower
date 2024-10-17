@@ -15,7 +15,7 @@ Version:	1.90.4
 Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
-URL:		http://upower.freedesktop.org/
+URL:		https://upower.freedesktop.org/
 Source0:	https://gitlab.freedesktop.org/upower/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.bz2
 BuildRequires:	intltool
 BuildRequires:	gettext
