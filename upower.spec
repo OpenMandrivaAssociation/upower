@@ -109,6 +109,8 @@ Headers and libraries for %{oname}.
 %{_unitdir}/upower.service
 %dir %{_datadir}/installed-tests/%{name}
 %{_datadir}/installed-tests/%{name}/*test
+%{_datadir}/polkit-1/actions/org.freedesktop.upower.policy
+%{_datadir}/zsh/site-functions/_upower
 %doc %{_mandir}/man1/*
 %doc %{_mandir}/man7/*
 %doc %{_mandir}/man8/*
