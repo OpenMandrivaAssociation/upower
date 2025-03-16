@@ -94,7 +94,7 @@ Headers and libraries for %{oname}.
 %systemd_postun_with_restart upower.service
 
 %files -f %{name}.lang
-%doc README AUTHORS NEWS HACKING
+%doc AUTHORS NEWS
 %dir %{_sysconfdir}/UPower/
 %config(noreplace) %{_sysconfdir}/UPower/UPower.conf
 %{_datadir}/dbus-1/system.d/*.conf
