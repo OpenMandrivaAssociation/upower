@@ -97,6 +97,7 @@ Headers and libraries for %{oname}.
 %doc AUTHORS NEWS
 %dir %{_sysconfdir}/UPower/
 %config(noreplace) %{_sysconfdir}/UPower/UPower.conf
+%{_sysconfdir}/UPower/UPower.conf.d/README.md
 %{_datadir}/dbus-1/system.d/*.conf
 %{_udevrulesdir}/*.rules
 %{_udevhwdbdir}/*.hwdb
@@ -110,6 +111,7 @@ Headers and libraries for %{oname}.
 %dir %{_datadir}/installed-tests/%{name}
 %{_datadir}/installed-tests/%{name}/*test
 %{_datadir}/polkit-1/actions/org.freedesktop.upower.policy
+%{_datadir}/polkit-1/rules.d/org.freedesktop.upower.rules
 %{_datadir}/zsh/site-functions/_upower
 %doc %{_mandir}/man1/*
 %doc %{_mandir}/man7/*
