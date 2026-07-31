@@ -11,7 +11,7 @@
 
 Summary:	Power Management Service
 Name:		upower
-Version:	1.91.2
+Version:	1.91.3
 Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
@@ -69,7 +69,7 @@ Obsoletes:	%{olddevname}
 Headers and libraries for %{oname}.
 
 %prep
-%autosetup -p1 -n %{name}-v%{version}
+%autosetup -p1 -n upower-v1.91.3
 
 %build
 %meson \
