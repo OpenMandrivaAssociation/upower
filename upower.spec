@@ -69,7 +69,7 @@ Obsoletes:	%{olddevname}
 Headers and libraries for %{oname}.
 
 %prep
-%autosetup -p1 -n upower-v1.91.3
+%autosetup -p1 -n upower-v%{version}
 
 %build
 %meson \
